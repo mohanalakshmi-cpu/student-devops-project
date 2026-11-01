@@ -1,4 +1,5 @@
 
+
 pipeline {
     agent any
 
@@ -11,20 +12,21 @@ pipeline {
 
         stage('Setup Python') {
             steps {
-                sh 'python3 --version'
-                sh 'python3 -m pip --version'
+                bat 'python --version'
+                bat 'python -m pip install pytest'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'python3 -m unittest -v test_app.py'
+                bat 'python -m pytest -v'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t student-devops-project .'
+                bat 'docker --version'
+                bat 'docker build -t student-management .'
             }
         }
     }
